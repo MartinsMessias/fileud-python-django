@@ -1,0 +1,16 @@
+{% extends 'fileudapp/base.html' %}
+
+{% block page-content %}
+<h3 class="text-dark">Upload de arquivo</h3>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {% for field in form %}
+    {% if not field.is_hidden %}
+      {{ field.label_tag }}
+    {% endif %}
+    {% include 'field.html' %}
+  {% endfor %}
+</form>
+{% endblock %}
+

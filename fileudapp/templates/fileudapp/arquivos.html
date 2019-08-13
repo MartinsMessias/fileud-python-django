@@ -1,0 +1,23 @@
+{% extends 'fileudapp/base.html' %}
+
+{% block page-content %}
+  <h3 class="text-dark">Gerenciador de arquivos</h3>
+  <ol type="1" class="list">
+    {% for arquivo in arquivos %}
+    <li class="list-item">
+      <div class="btn-group" role="group" aria-label="Basic example" style="margin: 15px;">
+        <a class="link" href="{{ arquivo.arquivo.url }}">
+          <button type="button" class="btn btn-outline"><b>{{ arquivo.nome_arquivo }}</b><br />
+            <em>Última modificação: {{ arquivo.data_modficacao }} |
+              Tipo: {{ arquivo.tipo_arquivo }}</em></button>
+        </a>
+        <a href="alterar/{{ arquivo.id}}"> <button type="button" class="btn btn-mg-1 btn-secondary">Alterar</button></a>
+        <a href="remover/{{ arquivo.id}}"> <button type="button" class="btn btn-mg-1 btn-danger">Remover</button></a>
+      </div>
+      {% endfor %}
+    </li>
+    <div class="container" align="left">
+      <a href="/upload/"> <button type="button" class="btn btn-success">+ Fazer Upload</button></a>
+    </div>
+  </ol>
+{% endblock %}
