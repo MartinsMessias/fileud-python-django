@@ -11,8 +11,8 @@
             <em>Última modificação: {{ arquivo.data_modficacao }} |
               Tipo: {{ arquivo.tipo_arquivo }}</em></button>
         </a>
-        <a href="alterar/{{ arquivo.id}}"> <button type="button" class="btn btn-mg-1 btn-secondary">Alterar</button></a>
-        <a href="remover/{{ arquivo.id}}"> <button type="button" class="btn btn-mg-1 btn-danger">Remover</button></a>
+        <a href="{% url 'alterar' arquivo.id %}"> <button type="button" class="btn btn-mg-1 btn-secondary">Alterar</button></a>
+        <a href="{% url 'remover' arquivo.id %}"> <button type="button" class="btn btn-mg-1 btn-danger">Remover</button></a>
       </div>
       {% endfor %}
     </li>
