@@ -33,16 +33,18 @@ def upload(request):
 def arquivos(request):
     arquivos = FileUDApp_services.listar_arquivos()
 
-    if request.method == 'GET':
-        arquivos = FileUDApp.objects.filter(nome_arquivo__icontains=request.GET.get('query'))
-        return arquivos()
-
     if not arquivos:
         messages.info(request, 'Sem arquivos para exibir!')
         return render(request, 'fileudapp/arquivos.html')
 
     return render(request, 'fileudapp/arquivos.html', {'arquivos': arquivos})
 
+def buscar(request):
+    if request.method == 'GET':
+        resp = request.GET.get('query')
+        arquivos = FileUDApp.objects.filter(nome_arquivo__contains=resp)
+
+    return render(request, 'fileudapp/arquivos.html', {'arquivos': arquivos})
 
 def remover(request, id):
     obj = get_object_or_404(FileUDApp, pk=id)
