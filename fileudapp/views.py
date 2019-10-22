@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import *
 from .models import *
 from .entidades import fileudapp
@@ -32,6 +32,10 @@ def upload(request):
 
 def arquivos(request):
     arquivos = FileUDApp_services.listar_arquivos()
+
+    if request.method == 'GET':
+        arquivos = FileUDApp.objects.filter(nome_arquivo__icontains=request.GET.get('query'))
+        return arquivos()
 
     if not arquivos:
         messages.info(request, 'Sem arquivos para exibir!')

@@ -2,6 +2,18 @@
 
 {% block page-content %}
   <h3 class="text-dark">Gerenciador de arquivos</h3>
+  <div class="container">
+    <div class="row">
+      <form class="navbar-form" role="search" action="" method="get">
+        <div class="input-group add-on">
+          <input class="form-control" placeholder="Pesquisa" name="query" id="srch-term" type="text">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="submit">Pesquisar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <ol type="1" class="list">
     {% for arquivo in arquivos %}
     <li class="list-item">
