@@ -39,12 +39,14 @@ def arquivos(request):
 
     return render(request, 'fileudapp/arquivos.html', {'arquivos': arquivos})
 
+
 def buscar(request):
     if request.method == 'GET':
-        resp = request.GET.get('query')
-        arquivos = FileUDApp.objects.filter(nome_arquivo__contains=resp)
+        field = request.GET.get('query')
+        files = FileUDApp.objects.filter(nome_arquivo__contains=field)
+        results = None
+    return render(request, 'fileudapp/busca.html', {'arquivos': files, 'resultados':results, 'field': field})
 
-    return render(request, 'fileudapp/arquivos.html', {'arquivos': arquivos})
 
 def remover(request, id):
     obj = get_object_or_404(FileUDApp, pk=id)

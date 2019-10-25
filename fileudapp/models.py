@@ -1,12 +1,13 @@
 from django.db import models
 
+
 # Create your models here.
 
 def user_directory_path(instance, filename):
     return 'docs/{0}/{1}'.format(instance.tipo_arquivo, filename)
 
-class FileUDApp(models.Model):
 
+class FileUDApp(models.Model):
     TIPO_ARQUIVO = (
         ('imagem', 'Imagem'),
         ('audio', 'Audio'),

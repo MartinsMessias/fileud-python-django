@@ -1,10 +1,13 @@
 from django import forms
 from .models import FileUDApp
 
+
+class FileFieldForm(forms.Form):
+    arquivo = forms.FileField()
+
+
 class FileUDAppForm(forms.ModelForm):
-
     class Meta:
-
         model = FileUDApp
         fields = ('nome_arquivo', 'tipo_arquivo', 'arquivo')
 
