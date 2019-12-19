@@ -1,11 +1,12 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import *
 from .models import *
 from .entidades import fileudapp
 from .services import FileUDApp_services
 
-
+@login_required
 def upload(request):
     if request.method == 'POST':
         form = FileUDAppForm(request.POST, request.FILES)
@@ -29,7 +30,7 @@ def upload(request):
         form = FileUDAppForm()
         return render(request, 'fileudapp/upload.html', {'form': form})
 
-
+@login_required
 def arquivos(request):
     arquivos = FileUDApp_services.listar_arquivos()
 
@@ -39,7 +40,7 @@ def arquivos(request):
 
     return render(request, 'fileudapp/arquivos.html', {'arquivos': arquivos})
 
-
+@login_required
 def buscar(request):
     if request.method == 'GET':
         field = request.GET.get('query')
@@ -47,7 +48,7 @@ def buscar(request):
         results = None
     return render(request, 'fileudapp/busca.html', {'arquivos': files, 'resultados':results, 'field': field})
 
-
+@login_required
 def remover(request, id):
     obj = get_object_or_404(FileUDApp, pk=id)
     FileUDApp_services.remover_arquivo(obj)
@@ -56,7 +57,7 @@ def remover(request, id):
 
     return redirect(arquivos)
 
-
+@login_required
 def alterar(request, id):
     arquivo_a = FileUDApp_services.listar_arquivo_id(id)
     form = FileUDAppForm(request.POST or None, instance=arquivo_a)
@@ -75,3 +76,7 @@ def alterar(request, id):
         return redirect(arquivos)
 
     return render(request, 'fileudapp/exibir.html', {'form': form})
+
+@login_required
+def accounts(request):
+    return HttpResponse(404)

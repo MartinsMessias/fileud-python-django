@@ -1,0 +1,18 @@
+{% extends 'fileudapp/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block page-content %}
+    <div class="card-body bg-info">
+        <h3 class="text-dark">Login</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                {% include 'field.html' %}
+            {% endfor %}
+            <div class="container" align="left">
+                <a href="#"><button type="submit" class="btn btn-primary">Acessar</button></a>
+                <a class="small text-danger" href="{% url 'password_reset' %}">Esqueci a senha</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

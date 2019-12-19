@@ -10,5 +10,6 @@ urlpatterns = [
     path('buscar/', views.buscar, name='buscar'),
     path('arquivos/', views.arquivos, name='arquivos'),
     path('arquivos/remover/<int:id>', views.remover, name='remover'),
-    path('arquivos/alterar/<int:id>', views.alterar, name='alterar')
+    path('arquivos/alterar/<int:id>', views.alterar, name='alterar'),
+    path('accounts/', views.accounts),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
